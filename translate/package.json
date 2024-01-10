@@ -1,0 +1,95 @@
+{
+  "name": "vn-translate-extension",
+  "displayName": "vn-translate-extension",
+  "description": "一个简单的翻译插件~",
+  "publisher": "verneyzhou",
+  "version": "0.0.2",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./src/index.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "vscode.translate.replace",
+        "title": "翻译一下"
+      },
+      {
+        "command": "translate.helloWorld",
+        "title": "hello translate"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "vscode.translate.replace",
+        "key": "ctrl+t",
+        "mac": "cmd+t",
+        "when": "editorTextFocus"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "when": "editorTextFocus",
+          "command": "vscode.translate.replace",
+          "group": "navigation"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "vscodeVnTranslate",
+      "type": "object",
+      "properties": {
+        "vscodeVnTranslate.youdaoAppkey": {
+          "type": "string",
+          "description": "有道 appKey"
+        },
+        "vscodeVnTranslate.youdaoAppSecret": {
+          "type": "string",
+          "description": "有道 appSecret"
+        },
+        "vscodeVnTranslate.openAutoTranslate": {
+          "type": "boolean",
+          "description": "是否开启自动翻译"
+        }
+      }
+    }  
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/crypto-js": "^4.2.1",
+    "@types/mocha": "^10.0.6",
+    "@types/node": "18.x",
+    "@types/vscode": "^1.85.0",
+    "@typescript-eslint/eslint-plugin": "^6.15.0",
+    "@typescript-eslint/parser": "^6.15.0",
+    "@vscode/test-cli": "^0.0.4",
+    "@vscode/test-electron": "^2.3.8",
+    "eslint": "^8.56.0",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "axios": "^1.6.5",
+    "crypto-js": "^4.2.0",
+    "querystring": "^0.2.1"
+  },
+  "author": "zhou",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/verneyZhou/vscode-plugins-project"
+  }
+}

@@ -1,0 +1,66 @@
+{
+    "div code snippets": {
+        "prefix": "div",
+        "body": [
+          "<div> this is div </div>"
+        ],
+        "description": "div code snippets"
+    },
+    "span code snippets": {
+        "prefix": "span",
+        "body": [
+          "<span> this is span </span>"
+        ],
+        "description": "span code snippets"
+    },
+    "for loop snippets": {
+      "prefix": ["for", "for-const"],
+      "body": [
+        "for (const ${2:element} of ${1:array}) {",
+        "\t$0",
+        "}"
+      ],
+      "description": "for loop snippets."
+    },
+    "fn snippets": {
+      "prefix": ["fn"],
+      "body": [
+              "function fn(${1:val}: number, ${2:val2}: string) {",
+              "    console.log ($CURRENT_YEAR: val, val2);",
+              "}"
+      ],
+      "description":[
+        "快速写一个fn函数",
+        "",
+        "调用fn方法",
+        "@param val — 参数1",
+        "@param val2 — 参数2."
+      ]
+    },
+    "react component": {
+      "prefix": [
+       "react"
+      ],
+      "body": [
+       "import * as React from 'react';",
+       "",
+       "export interface IProps {",
+       "\t${1}",
+       "}",
+       "",
+       "const ${2}: React.FC<IProps> = (props) => {",
+       "\tconst { } = props;",
+       "",
+       "\treturn (",
+       "\t\t<div className=\"component-$3\">",
+       "\t\t\t$4",
+       "\t\t</div>",
+       "\t);",
+       "};",
+       "",
+       "export default ${2};",
+       ""
+      ],
+      "description": "生成react组件模版"
+     }
+}
