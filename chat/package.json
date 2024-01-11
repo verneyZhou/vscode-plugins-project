@@ -16,20 +16,20 @@
     "viewsContainers": {
       "activitybar": [
         {
-          "id": "Chat-sidebar-view",
-          "title": "Chat",
-          "icon": "images/vite.svg"
+          "id": "chat-sidebar-view",
+          "title": "聊一下",
+          "icon": "images/chat-icon.png"
         }
       ]
     },
     "views": {
-      "Chat-sidebar-view": [
+      "chat-sidebar-view": [
         {
           "type": "webview",
-          "id": "Chat-sidebar",
-          "name": " Chat",
-          "icon": "images/vite.svg",
-          "contextualTitle": "Chat"
+          "id": "chat-sidebar-view",
+          "name": "聊一下",
+          "icon": "images/chat-icon.png",
+          "contextualTitle": "聊一下"
         }
       ]
     }

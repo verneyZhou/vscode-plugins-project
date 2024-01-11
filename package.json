@@ -1,0 +1,19 @@
+{
+  "name": "vscode-plugins-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/verneyZhou/vscode-plugins-project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/verneyZhou/vscode-plugins-project/issues"
+  },
+  "homepage": "https://github.com/verneyZhou/vscode-plugins-project#readme"
+}

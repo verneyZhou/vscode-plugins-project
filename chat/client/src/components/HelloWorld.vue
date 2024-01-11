@@ -4,6 +4,17 @@ import { ref } from 'vue'
 defineProps<{ msg: string }>()
 
 const count = ref(0)
+
+
+const sendMessage = () => {
+  window.parent.postMessage(
+    {
+      command: "WebSendMesToVscode",
+      data: "this message is from vue3",
+    },
+    "*"
+  );
+};
 </script>
 
 <template>
@@ -15,6 +26,7 @@ const count = ref(0)
       Edit
       <code>components/HelloWorld.vue</code> to test HMR
     </p>
+    <button type="button" @click="sendMessage">click</button>
   </div>
 
   <p>
