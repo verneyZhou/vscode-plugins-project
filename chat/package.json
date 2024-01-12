@@ -1,7 +1,9 @@
 {
-  "name": "chat",
-  "displayName": "chat",
-  "description": "chat plugin",
+  "name": "vn-chat-extension",
+  "displayName": "vn-chat-extension",
+  "icon": "images/chat-icon.png",
+  "description": "一个简单的AI聊天插件",
+  "publisher": "verneyzhou",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.85.0"
@@ -9,7 +11,9 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+    "onView:chat-sidebar-view"
+  ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [],
@@ -32,7 +36,21 @@
           "contextualTitle": "聊一下"
         }
       ]
-    }
+    },
+    "configuration": {
+      "title": "vscodeVnChat",
+      "type": "object",
+      "properties": {
+        "vscodeVnChat.wenxinyiyanKey": {
+          "type": "string",
+          "description": "文心一言 appKey"
+        },
+        "vscodeVnChat.wenxinyiyanSecret": {
+          "type": "string",
+          "description": "文心一言 appSecret"
+        }
+      }
+    }  
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
@@ -43,14 +61,20 @@
     "test": "vscode-test"
   },
   "devDependencies": {
-    "@types/vscode": "^1.85.0",
     "@types/mocha": "^10.0.6",
     "@types/node": "18.x",
+    "@types/vscode": "^1.85.0",
     "@typescript-eslint/eslint-plugin": "^6.15.0",
     "@typescript-eslint/parser": "^6.15.0",
-    "eslint": "^8.56.0",
-    "typescript": "^5.3.3",
     "@vscode/test-cli": "^0.0.4",
-    "@vscode/test-electron": "^2.3.8"
+    "@vscode/test-electron": "^2.3.8",
+    "eslint": "^8.56.0",
+    "typescript": "^5.3.3"
+  },
+  "author": "zhou",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/verneyZhou/vscode-plugins-project"
   }
 }

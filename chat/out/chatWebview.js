@@ -1,6 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ChatWebview = void 0;
+// const webUrl = 'http://localhost:3039'; // 本地测试
+const webUrl = 'https://vscode-chat-client.vercel.app'; // 线上
 // 采用面向对象的方式实现一个 ChatWebview 类
 class ChatWebview {
     // 写一个public变量，方便对象引用创建后的webview实例，但是可能存在还未完全解析完成时，访问值为null
@@ -17,6 +19,7 @@ class ChatWebview {
             console.log('=======onDidReceiveMessage', message);
             switch (message.command) {
                 case "WebSendMesToVscode":
+                    console.log("====WebSendMesToVscode", message.data);
                     // 实现一个简单的功能，将web端传递过来的消息插入到当前活动编辑器中
                     // let editor = window.activeTextEditor;
                     // editor?.edit((edit) => {
@@ -84,7 +87,7 @@ class ChatWebview {
 
      </script>
         <div class="outer">
-           <iframe id='WebviewIframe' class="webView_iframe" sandbox="allow-scripts allow-same-origin allow-forms allow-pointer-lock allow-downloads" allow="cross-origin-isolated; clipboard-read; clipboard-write;" src="http://localhost:5173/"></iframe>
+           <iframe id='WebviewIframe' class="webView_iframe" sandbox="allow-scripts allow-same-origin allow-forms allow-pointer-lock allow-downloads" allow="cross-origin-isolated; clipboard-read; clipboard-write;" src="${webUrl}"></iframe>
         </div>
     </body>
     </html>

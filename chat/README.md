@@ -5,8 +5,6 @@
 
 
 
-## TODO
+## 使用
 
-- 聊天界面UI优化
-- 聊天接口token获取优化，appKey本地存储
-- client和server部署
+- `Code => 首选项 => Settings => Extensions => vscodeVnChat`，配置`应用ID`和`应用秘钥`；

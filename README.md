@@ -21,49 +21,7 @@ vscode插件~
 
 
 
-
-## 前端项目初始化
-
-
-npm create vite@latest
-
-npm install
-
-npm run dev
-
-
-
-``` json
-// "contributes": {
-//     "commands": [
-//       {
-//         "command": "chat.helloWorld",
-//         "title": "Hello World"
-//       }
-//     ]
-// },
-"contributes": {
-    "commands": [],
-    "viewsContainers": {
-      "activitybar": [
-        {
-          "id": "Chat-sidebar-view",
-          "title": "Chat",
-          "icon": "images/vite.svg"
-        }
-      ]
-    },
-    "views": {
-      "Chat-sidebar-view": [
-        {
-          "type": "webview",
-          "id": "Chat-sidebar",
-          "name": " Chat",
-          "icon": "images/vite.svg",
-          "contextualTitle": "Chat"
-        }
-      ]
-    }
-},
-
-```
+- 代码补全插件
+- 翻译插件
+- 查看文件信息插件
+- AI Chat 插件

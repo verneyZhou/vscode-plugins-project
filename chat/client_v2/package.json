@@ -1,10 +1,12 @@
 {
-  "name": "fe",
+  "name": "client_v2",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "vercel": "vercel dev --listen 3039",
+    "publish": "vercel --prod",
     "build": "vue-tsc && vite build",
     "preview": "vite preview"
   },

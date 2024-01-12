@@ -6,9 +6,9 @@
         :key="index"
         :class="['message', item.type]"
       >
-        <RobotOutlined class="avatar" v-if="item.type !== 'question'"/>
+        <RobotOutlined class="avatar" v-if="item.type !== 'question'" :style="{fontSize: '20px', color: '#715fc2'}"/>
         <div class="bubble" :class="`${item.type}__bubble`">{{ item.content }}</div>
-        <UserOutlined class="avatar" v-if="item.type === 'question'"/>
+        <UserOutlined class="avatar" v-if="item.type === 'question'" :style="{fontSize: '20px', color: '#00ba9d'}"/>
         <!-- <div class="avatar">
           <component
             :is="item.type === 'question' ? UserOutlined : RobotOutlined"
@@ -22,20 +22,46 @@
         placeholder="那就聊一下？"
         @pressEnter="handleSend"
       />
-      <Button style="margin-left: 2px;" type="primary" @click="handleSend">发送</Button>
+      <Button style="margin-left: 8px;" type="primary" @click="handleSend">发送</Button>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import axios from "axios";
-import { ref } from "vue";
-import { Button, Input } from "ant-design-vue";
+import { onMounted, reactive, ref } from "vue";
+import { Button, Input, message } from "ant-design-vue";
 import { UserOutlined, RobotOutlined } from "@ant-design/icons-vue";
 const inputValue = ref("");
 let chatList = ref<any[]>([]);
 
+
+// appKey和appSecret, 由vscode插件传入
+const APP_KEY_PARAMS = reactive(<any>{
+  appKey: '',
+  appSecret: '',
+})
+
+
+onMounted(() => {
+  // 增加message的监听，用于接收vscode插件传入的appKey和appSecret
+  window.addEventListener("message", (event: any) => {
+      const message = event.data;
+      // console.log("message", message);
+      switch (message.command) {
+        case "vscodeSendMesToWeb":
+          console.log("vscodeSendMesToWeb", message.data);
+          Object.assign(APP_KEY_PARAMS, message.data)
+          break;
+      }
+    });
+});
+
 const handleSend = () => {
+  if (!APP_KEY_PARAMS.appKey || !APP_KEY_PARAMS.appSecret) {
+    message.info('请先设置appKey和appSecret')
+    return
+  }
   const question = inputValue.value.trim();
   if (question) {
     getAnswer(question);
@@ -44,9 +70,14 @@ const handleSend = () => {
   }
 };
 function getAnswer(question: string) {
-  const URL = "http://localhost:8080/chat";
+  // const URL = "http://localhost:8080/chat";
+  const URL = "/api/chat"; // serverless
   const payload = {
     messages: question,
+    appParams: {
+      appKey: APP_KEY_PARAMS.appKey,
+      appSecret: APP_KEY_PARAMS.appSecret,
+    },
   };
   sendPost(
     URL,
@@ -95,12 +126,12 @@ function sendPost(
 
 <style scoped>
 .chat-container {
-  min-width: 300px;
+  min-width: 340px;
   height: 100%;
   display: flex;
   flex-direction: column;
-  /* background-color: #1e1e1e; */
-  border: 1px solid #999;
+  background-color: #12172d;
+  border: 1px solid #1e1e1e;
   border-radius: 8px;
 }
 
@@ -113,21 +144,21 @@ function sendPost(
   gap: 10px;
 }
 .bubble {
-  color: #333;
+  color: #fff;
   text-align: right;
   margin-right: 8px;
   padding: 8px 16px;
-  background: #999;
+  background: #477eff;
   border-radius: 4px;
 }
 .answer__bubble {
   text-align: left;
   margin-left: 8px;
-  background: #eee;
+  background: #576c99;
 }
 .input-area {
   display: flex;
-  padding: 4px;
+  padding: 10px;
 }
 .message {
   display: flex;

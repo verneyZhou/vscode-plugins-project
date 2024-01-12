@@ -4,7 +4,12 @@ import { ChatWebview } from "./chatWebview";
 // 插件的入口函数, 当插件第一次加载时会执行activate
 export function activate(context: vscode.ExtensionContext) {
 
-	console.log('Congratulations, your extension "chat" is now active!');
+	console.log('Congratulations, your extension "聊一下" is now active!');
+
+	// 拿到配置文件中的文心一言的appkey和appSecret
+	const config = vscode.workspace.getConfiguration("vscodeVnChat");
+	const appKey = config.get("wenxinyiyanKey") as string;
+	const appSecret = config.get("wenxinyiyanSecret") as string;
 
 	// 实现侧边栏的初始化
 	// 实例化一个chatWebview
@@ -19,22 +24,34 @@ export function activate(context: vscode.ExtensionContext) {
 		},
 		})
 	);
+
+	// 把appkey和appSecret传递给webview
+	setTimeout(() => {
+		console.log('====setTimeout', appKey, appSecret);
+		chatWebview?.webview?.webview.postMessage({
+			command: "vscodeSendMesToWeb",
+			data: {
+				appKey,
+				appSecret,
+			},
+			});
+	}, 1500);
 	// 这里实现了一个简单的功能，在vscode打开的文件中，选中代码时会实时展示在web页面上
 	// 监听用户选中文本事件
-	vscode.window.onDidChangeTextEditorSelection((event) => {
-		const editor = event.textEditor;
-		let document = editor.document;
-		let selection = editor.selection;
-	// 获取当前窗口的文本
-		let text = document.getText(selection);
-		console.log('===onDidChangeTextEditorSelection', text);
-		// 上文提到chatWebview可能为null 因此需要可选链写法，所以这里存在不稳定性，不过测试没问题~
-		chatWebview?.webview?.webview.postMessage({
-		// 第一次postMessage，下一次在chatWebview文件的iframe中
-		command: "vscodeSendMesToWeb",
-		data: text,
-		});
-	});
+	// vscode.window.onDidChangeTextEditorSelection((event) => {
+	// 	const editor = event.textEditor;
+	// 	let document = editor.document;
+	// 	let selection = editor.selection;
+	// // 获取当前窗口的文本
+	// 	let text = document.getText(selection);
+	// 	console.log('===onDidChangeTextEditorSelection', text);
+	// 	// 上文提到chatWebview可能为null 因此需要可选链写法，所以这里存在不稳定性，不过测试没问题~
+	// 	chatWebview?.webview?.webview.postMessage({
+	// 	// 第一次postMessage，下一次在chatWebview文件的iframe中
+	// 	command: "vscodeSendMesToWeb",
+	// 	data: text,
+	// 	});
+	// });
 }
 
 // This method is called when your extension is deactivated
