@@ -67,10 +67,12 @@ export class ChatWebview implements WebviewViewProvider {
     <body>
       <script>
       
-      console.log('Hello from the webview!');
       // 向vscode 传递消息的固定写法, vscode 为我们封装好了postMessage
       // acquireVsCodeApi: 内置函数，可以访问 VS Code API 对象
       const vscode = acquireVsCodeApi();
+      console.log('Hello from the webview!!!', vscode);
+
+
       // 接收来自web页面的消息
       window.addEventListener('message', event => {
           const message = event.data;

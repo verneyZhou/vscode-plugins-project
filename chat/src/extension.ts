@@ -4,7 +4,7 @@ import { ChatWebview } from "./chatWebview";
 // 插件的入口函数, 当插件第一次加载时会执行activate
 export function activate(context: vscode.ExtensionContext) {
 
-	console.log('Congratulations, your extension "聊一下" is now active!');
+	console.log('======Congratulations, your extension "聊一下" is now active!');
 
 	// 拿到配置文件中的文心一言的appkey和appSecret
 	const config = vscode.workspace.getConfiguration("vscodeVnChat");
@@ -20,7 +20,7 @@ export function activate(context: vscode.ExtensionContext) {
 		vscode.window.registerWebviewViewProvider("chat-sidebar-view", chatWebview, {
 		webviewOptions: {
 			// 这是一个比较有用的配置项，可以确保你的插件在不可见时不会被销毁，建议开启，否侧每次打开都会重新加载一次插件
-			// retainContextWhenHidden: true,
+			retainContextWhenHidden: true,
 		},
 		})
 	);
@@ -55,4 +55,6 @@ export function activate(context: vscode.ExtensionContext) {
 }
 
 // This method is called when your extension is deactivated
-export function deactivate() {}
+export function deactivate() {
+	console.log('====deactivate');
+}

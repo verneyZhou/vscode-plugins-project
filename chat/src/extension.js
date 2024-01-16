@@ -28,7 +28,7 @@ const vscode = __importStar(require("vscode"));
 const chatWebview_1 = require("./chatWebview");
 // 插件的入口函数, 当插件第一次加载时会执行activate
 function activate(context) {
-    console.log('Congratulations, your extension "聊一下" is now active!');
+    console.log('======Congratulations, your extension "聊一下" is now active!');
     // 拿到配置文件中的文心一言的appkey和appSecret
     const config = vscode.workspace.getConfiguration("vscodeVnChat");
     const appKey = config.get("wenxinyiyanKey");
@@ -40,8 +40,8 @@ function activate(context) {
     // package.json 中声明，先理解为我们要把iframe渲染在那个地方（侧边栏还是标签页）需要在 packagea.json 中控制
     context.subscriptions.push(vscode.window.registerWebviewViewProvider("chat-sidebar-view", chatWebview, {
         webviewOptions: {
-        // 这是一个比较有用的配置项，可以确保你的插件在不可见时不会被销毁，建议开启，否侧每次打开都会重新加载一次插件
-        // retainContextWhenHidden: true,
+            // 这是一个比较有用的配置项，可以确保你的插件在不可见时不会被销毁，建议开启，否侧每次打开都会重新加载一次插件
+            retainContextWhenHidden: true,
         },
     }));
     // 把appkey和appSecret传递给webview
@@ -74,6 +74,8 @@ function activate(context) {
 }
 exports.activate = activate;
 // This method is called when your extension is deactivated
-function deactivate() { }
+function deactivate() {
+    console.log('====deactivate');
+}
 exports.deactivate = deactivate;
 //# sourceMappingURL=extension.js.map

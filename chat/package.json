@@ -4,7 +4,7 @@
   "icon": "images/chat-icon.png",
   "description": "一个简单的AI聊天插件",
   "publisher": "verneyzhou",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "engines": {
     "vscode": "^1.85.0"
   },
@@ -14,7 +14,7 @@
   "activationEvents": [
     "onView:chat-sidebar-view"
   ],
-  "main": "./out/extension.js",
+  "main": "src/extension.js",
   "contributes": {
     "commands": [],
     "viewsContainers": {
